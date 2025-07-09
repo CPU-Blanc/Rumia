@@ -1,0 +1,10 @@
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[tasks.test]
+command = "cargo"
+args = ["nextest", "run"]
+
+[tasks.lint]
+command = "cargo"
+args = ["clippy", "--" ,"-Dwarnings"]

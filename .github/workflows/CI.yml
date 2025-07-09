@@ -1,0 +1,64 @@
+name: "CI"
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    name: format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: moonrepo/setup-rust@v1
+        with:
+          components: rustfmt
+      - name: check formatting
+        run: cargo fmt --all --check
+
+  lint:
+    name: lint
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: moonrepo/setup-rust@v1
+        with:
+          bins: cargo-make
+          components: clippy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: run linter
+        run: cargo make lint
+
+  test:
+    name: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: moonrepo/setup-rust@v1
+        with:
+          bins: cargo-make, cargo-nextest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: run tests
+        run: cargo make test
