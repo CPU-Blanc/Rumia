@@ -10,7 +10,6 @@ use std::{net::Ipv4Addr, path::Path, str::FromStr};
 pub enum StorageType {
     #[default]
     File,
-    // Mysql,
 }
 
 impl FromStr for StorageType {
@@ -18,7 +17,6 @@ impl FromStr for StorageType {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
             "file" => Ok(Self::File),
-            // "mysql" => Ok(Self::Mysql),
             _ => Err(()),
         }
     }
