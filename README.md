@@ -1,7 +1,7 @@
 # Rumia
 
 [![CI](https://github.com/CPU-Blanc/Rumia/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/CPU-Blanc/Rumia/actions/workflows/CI.yml)
-![GitHub Release](https://img.shields.io/github/v/release/CPU-Blanc/Rumia)
+![GitHub Release](https://img.shields.io/github/v/release/CPU-Blanc/Rumia?color=blue)
 ![GitHub License](https://img.shields.io/github/license/CPU-Blanc/Rumia)
 
 
