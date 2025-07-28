@@ -86,9 +86,7 @@ impl Settings {
                 api_key: Box::leak(Box::from(
                     env::var("RUMIA_API_KEY").expect("API key not provided"),
                 )),
-                port: env::var("RUMIA_PORT")
-                    .map(|s| s.parse().unwrap())
-                    .unwrap_or(10032),
+                port: 10032,
                 url: env::var("RUMIA_URL")
                     .unwrap_or(String::from("http://localhost"))
                     .leak(),

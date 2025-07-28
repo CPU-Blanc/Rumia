@@ -9,6 +9,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 -->
 
 ## [Unreleased]
+### Breaking
+- Removed setting port for Docker instances. This would break the built-in healthchecks and can already be achieved via Docker's port mapping
 
 ## [0.1.0] - 2025-07-27
 

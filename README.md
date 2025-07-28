@@ -61,7 +61,7 @@ docker create \
 | Env var         | CLI arg          | Type         | Default          | Info                                                                                                                               |
 |-----------------|------------------|--------------|------------------|------------------------------------------------------------------------------------------------------------------------------------|
 | `RUMIA_API_KEY` | `-a`,`--api-key` | `String`     | **Required**     | API key to use for authorisation                                                                                                   |
-| `RUMIA_PORT`    | `-p`,`--port`    | `Int`        | 10032            | Port to bind to                                                                                                                    |
+| `RUMIA_PORT`    | `-p`,`--port`    | `Int`        | 10032            | Port to bind to. You cannot set this with the Docker version, instead set it using Docker's port mapping                           |
 | `RUMIA_URL`     | `-u`,`--url`     | `String`     | http://localhost | URL which your instance is available at                                                                                            |
 | `RUMIA_VERBOSE` | `-v`,`--verbose` | `Bool`       | `false`          | Verbose logging                                                                                                                    |
 | `RUMIA_IP`      | `-i`,`--ip`      | `Ipv4Addr`   | `0.0.0.0`        | IP address to bind to                                                                                                              |
