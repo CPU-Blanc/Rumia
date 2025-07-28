@@ -9,6 +9,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 -->
 
 ## [Unreleased]
+
+## [0.2.0] - 2025-07-29
 ### Breaking
 - Removed setting port for Docker instances. This would break the built-in healthchecks and can already be achieved via Docker's port mapping
 
@@ -16,5 +18,6 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 Initial release
 
-[Unreleased]: https://github.com/CPU-Blanc/Rumia/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/CPU-Blanc/Rumia/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/CPU-Blanc/Rumia/tree/v0.1.0
