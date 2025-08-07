@@ -89,6 +89,8 @@ All endpoints marked with '🔒' are protected and require authorisation by prov
 |----------|------|
 | 200 - OK | "ok" |
 
+---
+
 ### `GET /attachment/<filepath>`
 #### Responses
 | Code             | Info                                  |
