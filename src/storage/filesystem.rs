@@ -83,10 +83,10 @@ mod tests {
             .unwrap();
         let result = Sha256::digest(saved_bytes);
 
-        assert_eq!(result[..], FILE_HASH[..]);
         tokio::fs::remove_file(FILE_PATH.join("testfile.png"))
             .await
             .unwrap();
+        assert_eq!(result[..], FILE_HASH[..]);
     }
 
     #[tokio::test]
@@ -107,6 +107,8 @@ mod tests {
         tokio::fs::write(FILE_PATH.join("delete_test.txt"), "delete test")
             .await
             .unwrap();
+
+        assert!(FILE_PATH.join("delete_test.txt").exists());
         storage.delete("delete_test.txt").await.unwrap();
         assert!(!FILE_PATH.join("delete_test.txt").exists());
     }
