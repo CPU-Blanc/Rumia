@@ -5,6 +5,13 @@ CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
 command = "cargo"
 args = ["nextest", "run"]
 
-[tasks.lint]
+[tasks.lint-cli]
 command = "cargo"
 args = ["clippy", "--" ,"-Dwarnings"]
+
+[tasks.lint-docker]
+command = "cargo"
+args = ["clippy", "--no-default-features", "--features", "docker", "--" ,"-Dwarnings"]
+
+[tasks.lint]
+run_task = {name = ["lint-docker", "lint-cli"], parallel = true}
