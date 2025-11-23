@@ -9,7 +9,7 @@ use rocket::{
     config::LogLevel,
     data::{Limits, ToByteUnit},
 };
-use routes::*;
+use routes::{delete_file, get_file, upload_file, upload_file_url};
 use settings::Settings;
 use std::{net::Ipv4Addr, sync::LazyLock};
 use storage::Storage;
@@ -29,7 +29,7 @@ pub(crate) static SETTINGS: LazyLock<Settings> = {
             port: 10032,
             url: "http://localhost",
             verbose: true,
-            ip: Ipv4Addr::new(0, 0, 0, 0),
+            ip: Ipv4Addr::UNSPECIFIED,
             storage_type: StorageCommands::Debug,
         })
     } else {
@@ -40,6 +40,7 @@ pub(crate) static SETTINGS: LazyLock<Settings> = {
 pub static STORAGE: LazyLock<Box<dyn Storage>> =
     LazyLock::new(|| storage::init(&SETTINGS.storage_type));
 
+#[must_use]
 pub fn server() -> Rocket<Build> {
     let config = rocket::Config {
         port: SETTINGS.port,

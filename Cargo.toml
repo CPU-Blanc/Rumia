@@ -25,3 +25,9 @@ reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"
 default = ["cli"]
 cli = ["dep:clap"]
 docker = []
+
+[lints.clippy]
+panic = "deny"
+unwrap_used = "deny"
+expect_used = "warn"
+indexing_slicing = "deny"

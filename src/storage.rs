@@ -1,7 +1,7 @@
 mod debug;
 mod filesystem;
 
-use crate::error::*;
+use crate::error::{DeleteError, LoadError, SaveError};
 use crate::settings::StorageCommands;
 use crate::storage::{debug::DebugStorage, filesystem::FileSystemStorage};
 use rocket::fs::{NamedFile, TempFile};

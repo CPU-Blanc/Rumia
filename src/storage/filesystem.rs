@@ -1,5 +1,5 @@
 use super::{InputFile, Storage};
-use crate::error::*;
+use crate::error::{DeleteError, LoadError, SaveError};
 use rocket::fs::NamedFile;
 use std::path::Path;
 

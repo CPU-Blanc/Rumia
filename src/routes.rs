@@ -7,7 +7,7 @@ use rocket::{
     outcome::Outcome,
     request::FromRequest,
 };
-use std::{path::Path, str::FromStr};
+use std::{borrow::Cow, path::Path, str::FromStr};
 use url::Url;
 use uuid::Uuid;
 
@@ -52,13 +52,14 @@ pub(crate) async fn upload_file(
     let (filename, extension) = validate_file(&upload.filename)?;
     let hash = Uuid::new_v4().to_string();
     let save_name = format!("{hash}.{extension}");
+    let return_url = format!("{}/attachment/{hash}/{filename}", &SETTINGS.url);
 
     STORAGE
         .save(InputFile::TempFile(&mut upload.file), &save_name)
         .await
         .map_err(|_| Status::InternalServerError)?;
 
-    Ok(format!("{}/attachment/{hash}/{filename}", &SETTINGS.url))
+    Ok(return_url)
 }
 
 #[post("/api/upload/<url>")]
@@ -70,13 +71,13 @@ pub(crate) async fn upload_file_url(key: ApiKey<'_>, url: &str) -> Result<String
     let filename = Path::new(url.path())
         .file_name()
         .ok_or(Status::BadRequest)?
-        .to_str()
-        .unwrap();
+        .to_string_lossy();
 
-    let (_, extension) = validate_file(filename)?;
+    let (_, extension) = validate_file(&filename)?;
     let hash = Uuid::new_v4().to_string();
     let save_name = format!("{hash}.{extension}");
 
+    #[allow(clippy::unwrap_used)]
     let resp = reqwest::get(url.clone())
         .await
         .map_err(|_| Status::BadGateway)?
@@ -117,22 +118,18 @@ pub async fn delete_file(key: ApiKey<'_>, hash: &str, filename: &str) -> Result<
         .map_err(|_| Status::NotFound)
 }
 
-fn validate_file(filename: &str) -> Result<(String, String), Status> {
+fn validate_file(filename: &str) -> Result<(Cow<'_, str>, Cow<'_, str>), Status> {
     let path = Path::new(filename);
 
     let filename = path
         .file_name()
         .ok_or(Status::BadRequest)?
-        .to_str()
-        .unwrap()
-        .to_owned();
+        .to_string_lossy();
 
     let extension = path
         .extension()
         .ok_or(Status::BadRequest)?
-        .to_str()
-        .unwrap()
-        .to_owned();
+        .to_string_lossy();
 
     if BLACKLISTED_EXT.iter().any(|ext| *ext == extension)
         || BLACKLISTED_NAME.iter().any(|name| filename.contains(name))
@@ -150,9 +147,9 @@ fn validate_hash<T: AsRef<str>>(hash: T) -> Result<String, Status> {
 }
 
 fn validate_key(provided: ApiKey<'_>) -> Result<(), Status> {
-    if provided.0 != SETTINGS.api_key {
-        Err(Status::Unauthorized)
-    } else {
+    if provided.0 == SETTINGS.api_key {
         Ok(())
+    } else {
+        Err(Status::Unauthorized)
     }
 }

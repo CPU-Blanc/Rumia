@@ -8,6 +8,7 @@ pub(crate) struct DebugStorage {
     store: Mutex<HashMap<String, Arc<[u8]>>>,
 }
 
+#[allow(clippy::unwrap_used)]
 #[rocket::async_trait]
 impl Storage for DebugStorage {
     async fn save<'r>(&self, file: InputFile<'r>, filename: &str) -> Result<(), SaveError> {
@@ -19,7 +20,7 @@ impl Storage for DebugStorage {
                     .insert(String::from(filename), Arc::from(bytes));
             }
             InputFile::TempFile(file) => {
-                let mut buffer = vec![0; file.len() as usize];
+                let mut buffer = vec![0; usize::try_from(file.len()).unwrap()];
 
                 file.open()
                     .await
@@ -33,7 +34,8 @@ impl Storage for DebugStorage {
                     .await
                     .insert(String::from(filename), Arc::from(buffer));
             }
-        };
+        }
+
         Ok(())
     }
 

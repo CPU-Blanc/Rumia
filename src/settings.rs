@@ -1,9 +1,12 @@
-#[cfg(feature = "cli")]
-use clap::{Parser, Subcommand, ValueEnum};
 use dotenv::dotenv;
 #[cfg(feature = "docker")]
 use std::env;
 use std::{net::Ipv4Addr, path::Path, str::FromStr};
+#[cfg(feature = "cli")]
+use {
+    clap::{Parser, Subcommand, ValueEnum},
+    std::convert::Infallible,
+};
 
 #[derive(Default, Clone, Debug)]
 #[cfg_attr(feature = "cli", derive(ValueEnum))]
@@ -67,12 +70,12 @@ pub struct Settings {
 }
 
 #[cfg(feature = "cli")]
-fn return_leaked_str(s: &str) -> Result<&'static str, String> {
+fn return_leaked_str(s: &str) -> Result<&'static str, Infallible> {
     Ok(s.to_owned().leak())
 }
 
 #[cfg(feature = "cli")]
-fn return_leaked_path(s: &str) -> Result<&'static Path, String> {
+fn return_leaked_path(s: &str) -> Result<&'static Path, Infallible> {
     Ok(Box::leak(Box::from(Path::new(s))))
 }
 
@@ -81,6 +84,7 @@ impl Settings {
         dotenv().ok();
 
         #[cfg(feature = "docker")]
+        #[allow(clippy::expect_used)]
         {
             Settings {
                 api_key: Box::leak(Box::from(
@@ -91,17 +95,18 @@ impl Settings {
                     .unwrap_or(String::from("http://localhost"))
                     .leak(),
                 verbose: env::var("RUMIA_VERBOSE")
-                    .unwrap_or(String::from("false").to_lowercase())
+                    .unwrap_or(String::from("false"))
+                    .to_lowercase()
                     .parse()
-                    .unwrap(),
+                    .expect("unable to parse verbose as boolean"),
                 ip: env::var("RUMIA_IP")
                     .unwrap_or(String::from("0.0.0.0"))
                     .parse()
-                    .unwrap(),
+                    .expect("unable to parse IP as IPv4 Addr"),
                 storage_type: match env::var("RUMIA_STORAGE")
                     .unwrap_or(String::from("FILE"))
                     .parse::<StorageType>()
-                    .unwrap()
+                    .expect("unable to parse storage as one of: FILE")
                 {
                     StorageType::File => StorageCommands::FileSystem {
                         path: Path::new(

@@ -1,4 +1,4 @@
-#![allow(dead_code)]
+#![allow(dead_code, clippy::unwrap_used)]
 
 use rocket::{http::ContentType, local::blocking::Client};
 use rumia::{STORAGE, server, storage::InputFile};
@@ -42,20 +42,14 @@ pub(crate) fn get_image_data<T: AsRef<Path>>(filepath: T, fake: bool) -> (Conten
         .parse::<ContentType>()
         .unwrap();
 
-    let filename = filepath
-        .as_ref()
-        .file_name()
-        .unwrap()
-        .to_str()
-        .unwrap()
-        .to_string();
+    let filename = filepath.as_ref().file_name().unwrap().to_string_lossy();
 
     let ext = filename.split_once(".").unwrap().1;
 
     let mut file_data = if fake {
         vec![]
     } else {
-        std::fs::read(filepath).unwrap()
+        std::fs::read(&filepath).unwrap()
     };
 
     let file_type = ContentType::from_extension(ext).unwrap().to_string();

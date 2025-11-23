@@ -9,8 +9,9 @@ pub enum LoadError {
 impl Display for LoadError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            LoadError::FileNotExist(string) => write!(f, "{string}"),
-            LoadError::PermissionDenied(string) => write!(f, "{string}"),
+            LoadError::FileNotExist(string) | LoadError::PermissionDenied(string) => {
+                write!(f, "{string}")
+            }
         }
     }
 }
