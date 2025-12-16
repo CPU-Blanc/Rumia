@@ -11,8 +11,8 @@ fn main() -> ExitCode {
 
     let resp = minreq::get(endpoint).send();
 
-    if resp.is_err() {
-        println!("{}", resp.unwrap_err());
+    if let Err(error) = resp {
+        println!("{}", error);
         return ExitCode::from(1);
     };
 
