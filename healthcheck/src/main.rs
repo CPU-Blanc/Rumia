@@ -1,5 +1,6 @@
 use std::{env, process::ExitCode};
 
+#[inline]
 fn main() -> ExitCode {
     let args: Vec<String> = env::args().collect();
 
