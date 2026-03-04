@@ -16,9 +16,11 @@ jobs:
   format:
     name: format
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
-      - uses: moonrepo/setup-rust@v1
+      - uses: moonrepo/setup-rust@ede6de059f8046a5e236c94046823e2af11ca670 # v1
         with:
           components: rustfmt
       - name: check formatting
@@ -33,9 +35,11 @@ jobs:
           - ubuntu-latest
           - windows-latest
       fail-fast: false
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
-      - uses: moonrepo/setup-rust@v1
+      - uses: moonrepo/setup-rust@ede6de059f8046a5e236c94046823e2af11ca670 # v1
         with:
           bins: cargo-make
           components: clippy
@@ -53,9 +57,11 @@ jobs:
           - ubuntu-latest
           - windows-latest
       fail-fast: false
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
-      - uses: moonrepo/setup-rust@v1
+      - uses: moonrepo/setup-rust@ede6de059f8046a5e236c94046823e2af11ca670 # v1
         with:
           bins: cargo-make, cargo-nextest
         env:
