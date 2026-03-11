@@ -10,6 +10,11 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-03-11
+
+### Security
+- Addresses [CVE-2026-31812](https://www.cve.org/CVERecord?id=CVE-2026-31812) in a dependency. Ensure you update ASAP
+
 ## [0.2.6] - 2026-03-04
 
 Maintenance release
@@ -42,7 +47,8 @@ Maintenance release
 
 Initial release
 
-[Unreleased]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.6...HEAD
+[Unreleased]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.7...HEAD
+[0.2.7]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.6...v0.2.7
 [0.2.6]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.5...v0.2.6
 [0.2.5]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.3...v0.2.4
