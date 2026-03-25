@@ -20,7 +20,7 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v6
-      - uses: moonrepo/setup-rust@ede6de059f8046a5e236c94046823e2af11ca670 # v1
+      - uses: moonrepo/setup-rust@abb2d32350334249b178c401e5ec5836e0cd88d3 # v1
         with:
           components: rustfmt
       - name: check formatting
@@ -39,7 +39,7 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v6
-      - uses: moonrepo/setup-rust@ede6de059f8046a5e236c94046823e2af11ca670 # v1
+      - uses: moonrepo/setup-rust@abb2d32350334249b178c401e5ec5836e0cd88d3 # v1
         with:
           bins: cargo-make
           components: clippy
@@ -61,7 +61,7 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v6
-      - uses: moonrepo/setup-rust@ede6de059f8046a5e236c94046823e2af11ca670 # v1
+      - uses: moonrepo/setup-rust@abb2d32350334249b178c401e5ec5836e0cd88d3 # v1
         with:
           bins: cargo-make, cargo-nextest
         env:
