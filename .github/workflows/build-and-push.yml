@@ -109,7 +109,6 @@ jobs:
           target: ${{ matrix.target }}
           archive: $bin-${{ matrix.build }}
           ref: refs/tags/${{ needs.check-tag.outputs.new-tag }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
   release-docker:
     runs-on: ubuntu-latest
