@@ -103,7 +103,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: build and upload binaries
-        uses: taiki-e/upload-rust-binary-action@0e34102c043ded9f2ca39f7af5cd99a540c61aff # v1
+        uses: taiki-e/upload-rust-binary-action@10c1cf6a3da113ad4e60018e386570529aa5f1d3 # v1
         with:
           bin: rumia
           target: ${{ matrix.target }}
