@@ -79,7 +79,6 @@ jobs:
         uses: taiki-e/create-gh-release-action@f67cf7b2dadd83d36b981e674a6b08063997ce68 # v1
         with:
           ref: refs/tags/${{ needs.check-tag.outputs.new-tag }}
-          token: ${{ secrets.GITHUB_TOKEN }}
           changelog: CHANGELOG.md
           title: 'Rumia $tag'
 
