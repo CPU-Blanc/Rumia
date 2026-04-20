@@ -76,7 +76,7 @@ jobs:
           git push origin --tags
 
       - name: create release
-        uses: taiki-e/create-gh-release-action@f67cf7b2dadd83d36b981e674a6b08063997ce68 # v1
+        uses: taiki-e/create-gh-release-action@eba8ea96c86cca8a37f1b56e94b4d13301fba651 # v1
         with:
           ref: refs/tags/${{ needs.check-tag.outputs.new-tag }}
           changelog: CHANGELOG.md
