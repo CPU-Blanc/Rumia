@@ -52,7 +52,7 @@ pub(crate) async fn upload_file(
     let (filename, extension) = validate_file(&upload.filename)?;
     let hash = Uuid::new_v4().to_string();
     let save_name = format!("{hash}.{extension}");
-    let return_url = format!("{}/attachment/{hash}/{filename}", &SETTINGS.url);
+    let return_url = format!("{}/attachment/{hash}/{filename}", SETTINGS.url);
 
     STORAGE
         .save(InputFile::TempFile(&mut upload.file), &save_name)
@@ -94,7 +94,7 @@ pub(crate) async fn upload_file_url(key: ApiKey<'_>, url: &str) -> Result<String
         .await
         .map_err(|_| Status::InternalServerError)?;
 
-    Ok(format!("{}/attachment/{hash}/{filename}", &SETTINGS.url))
+    Ok(format!("{}/attachment/{hash}/{filename}", SETTINGS.url))
 }
 
 #[get("/attachment/<hash>/<filename>")]
