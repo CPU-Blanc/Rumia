@@ -101,6 +101,11 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v7
 
+      - name: setup rust
+        uses: moonrepo/setup-rust@abb2d32350334249b178c401e5ec5836e0cd88d3 # v1
+        with:
+          channel: ${{ vars.RUSTC_VERSION }}
+
       - name: build and upload binaries
         uses: taiki-e/upload-rust-binary-action@f0d45ae91ee7b8ee928de7a9d04d893a08bcbec6 # v1
         with:
