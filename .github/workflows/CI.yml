@@ -23,6 +23,7 @@ jobs:
       - uses: moonrepo/setup-rust@abb2d32350334249b178c401e5ec5836e0cd88d3 # v1
         with:
           components: rustfmt
+          channel: ${{ vars.RUSTC_VERSION }}
       - name: check formatting
         run: cargo fmt --all --check
 
@@ -43,6 +44,7 @@ jobs:
         with:
           bins: cargo-make
           components: clippy
+          channel: ${{ vars.RUSTC_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: run linter
@@ -64,6 +66,7 @@ jobs:
       - uses: moonrepo/setup-rust@abb2d32350334249b178c401e5ec5836e0cd88d3 # v1
         with:
           bins: cargo-make, cargo-nextest
+          channel: ${{ vars.RUSTC_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: run tests
