@@ -1,12 +1,20 @@
 version: 2
 updates:
+  - package-ecosystem: "rust-toolchain"
+    directory: "/"
+    labels:
+      - "type: dependencies"
+      - "area: rust"
+    schedule:
+      interval: "monthly"
+
   - package-ecosystem: "cargo"
     directory: "/"
     labels:
       - "type: dependencies"
       - "area: cargo"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "docker"
     directory: "/"
@@ -14,7 +22,7 @@ updates:
       - "type: dependencies"
       - "area: docker"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
 
   - package-ecosystem: "github-actions"
     directory: "/"
