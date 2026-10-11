@@ -10,6 +10,11 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.2.12] - 2026-10-11
+
+### Security
+- Addresses a security vulnerability in a dependency.
+
 ## [0.2.11] - 2026-10-07
 
 ### Security
@@ -66,7 +71,8 @@ Maintenance release
 
 Initial release
 
-[Unreleased]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.11...HEAD
+[Unreleased]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.12...HEAD
+[0.2.12]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.11...v0.2.12
 [0.2.11]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.10...v0.2.11
 [0.2.10]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.9...v0.2.10
 [0.2.9]: https://github.com/CPU-Blanc/Rumia/compare/v0.2.8...v0.2.9
