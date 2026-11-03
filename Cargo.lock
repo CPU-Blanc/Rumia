@@ -1604,7 +1604,7 @@ dependencies = [
 
 [[package]]
 name = "rumia"
-version = "0.2.12"
+version = "0.2.13"
 dependencies = [
  "clap",
  "dotenv",
